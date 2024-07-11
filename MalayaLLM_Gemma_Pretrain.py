@@ -35,7 +35,7 @@ print(tokenizer.tokenize("നിങ്ങൾ ചിന്തിക്കുന�
 all_vocabs = ["malayalam_bpe_spe.model"]
 
 #Add Malayalam tokens
-#Thus should be done before calling FastLanguageModel.get_peft_model()
+#This should be done before calling FastLanguageModel.get_peft_model()
 mlm_sp_model = spm.SentencePieceProcessor()
 for v in all_vocabs:
     mlm_sp_model.Load(v)
@@ -80,8 +80,8 @@ def formatting_prompts_func(examples):
     return { "text" : outputs, }
 pass
 
-dataset = load_dataset("wikimedia/wikipedia", "20231101.ml", split = "train",)
-# dataset = load_dataset("VishnuPJ/Malayalam_CultureX_IndicCorp_SMC")
+dataset = load_dataset("wikimedia/wikipedia", "20231101.ml", split = "train")
+# dataset = load_dataset("VishnuPJ/Malayalam_CultureX_IndicCorp_SMC", split = "train")
 
 trainer = UnslothTrainer(
     model = model,
