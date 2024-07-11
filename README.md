@@ -22,6 +22,22 @@ The MalayaLLM models have been improved and customized expanding upon the ground
 # Model Update
 Latest Gemma2-9B trained model is here :[MalayaLLM:Gemma-2-9B](https://huggingface.co/collections/VishnuPJ/malayallm-malayalam-gemma-2-9b-6689843413da7de7c57b5b8c)
 
+## 💾 Installation Instructions
+### Conda Installation
+Select either `pytorch-cuda=11.8` for CUDA 11.8 or `pytorch-cuda=12.1` for CUDA 12.1. If you have `mamba`, use `mamba` instead of `conda` for faster solving. See this [Github issue](https://github.com/unslothai/unsloth/issues/73) for help on debugging Conda installs.
+```bash
+conda create --name unsloth_env \
+    python=3.10 \
+    pytorch-cuda=<11.8/12.1> \
+    pytorch cudatoolkit xformers -c pytorch -c nvidia -c xformers \
+    -y
+conda activate unsloth_env
+
+pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+
+pip install --no-deps "trl<0.9.0" peft accelerate bitsandbytes
+```
+
 ## A simple example code
 
 ```python
@@ -103,9 +119,27 @@ Enter instruction (or 'exit' to end): ഇന്ത്യയുടെ അടു�
 - പാകിസ്ഥാൻ"<eos>
 Enter instruction (or 'exit' to end):exit
 ```
+
+## How to run GGUF
+
+  - #### llama.cpp Web Server
+    - The web server is a lightweight HTTP server that can be used to serve local models and easily connect them to existing clients.
+  - #### Building llama.cpp
+    - To build `llama.cpp` locally, follow the instructions provided in the [build documentation](https://github.com/ggerganov/llama.cpp/blob/master/docs/build.md).
+  - #### Running llama.cpp as a Web Server
+    - Once you have built `llama.cpp`, you can run it as a web server. Below is an example of how to start the server:
+        ```sh
+        llama-server.exe -m gemma_7b_instruction.Q4_K_M.gguf -ngl 42 -c 128 -n 100
+        ```
+  - #### Accessing the Web UI
+    - After starting the server, you can access the basic web UI via your browser at the following address:
+      [http://localhost:8080](http://localhost:8080)
+<img src="https://cdn-uploads.huggingface.co/production/uploads/64e65800e44b2668a56f9731/te7d5xjMrtk6RDMEAxmCy.png" alt="Baby MalayaLLM" width="600" height="auto">
+  
 ## Made Using UNSLOTH
 
 Thanks to [Unsloth](https://github.com/unslothai/unsloth), the process of fine-tuning large language models (LLMs) has become much easier and more efficient.
+
 <img src="https://cdn-uploads.huggingface.co/production/uploads/64e65800e44b2668a56f9731/WPt_FKUWDdc6--l_Qnb-G.png" alt="Unsloth" width="300" height="auto">
 
 # 🌟Happy coding💻🌟
